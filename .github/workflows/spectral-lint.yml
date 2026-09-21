@@ -1,0 +1,18 @@
+name: Lint OpenAPI Specs
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  spectral:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Install spectral
+        run: npx @stoplight/spectral-cli lint openapi/openapi.yamly
+      - name: Run Spectral Lint
+        run: spectral lint openapi/openapi.yaml

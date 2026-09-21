@@ -1,0 +1,13 @@
+type: object
+required:
+  - amount
+  - currency
+properties:
+  amount:
+    type: integer
+    description: Amount intended to be collected in the smallest currency unit(e.g.,1000=$10.00)
+    example: 1000
+  currency: 
+    type: string
+    description: Three-letter ISO currency code.
+    example: "usd"

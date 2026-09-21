@@ -1,0 +1,15 @@
+description: Request Payload was malformed or missing required fields.
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - error
+        - message
+      properties:
+        error:
+          type: string
+          example: "invalid_request_error"
+        message:
+          type: string
+          example: "The amount parameter must be a postive integer."

@@ -1,0 +1,43 @@
+openapi: 3.1.0
+info:
+  title: Payments Idempotency Engine API
+  version: 1.0.0
+  description: High-reliability payment charge endpoints with idempotency locking.
+  contact:
+    name: API Support
+    email: support@example.com
+servers:
+  - url: https://api.example.com/v1
+    description: Production Server
+  - url: https://sandbox.example.com/v1
+    description: Sandbox Environment
+tags:
+  - name: Charges
+    description: Endpoints for handling payment charges
+paths:
+  /charges:
+    post:
+      summary: Create a charge
+      description: Charges a payment method idempotently using an Idempotency-Key header.
+      operationId: createCharge
+      tags:
+        - Charges
+      parameters:
+        - $ref: './components/parameters/Idempotency-Key.yaml'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './components/schemas/ChargeRequest.yaml'
+      responses:
+        '201':
+          description: Charge created successfully
+          content:
+            application/json:
+              schema:
+                $ref: './components/schemas/ChargeResponse.yaml'
+        '409':
+          $ref: './components/responses/409Conflict.yaml'
+        '422':
+          $ref: './components/responses/422Unprocessable.yaml'
